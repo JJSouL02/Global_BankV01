@@ -32,15 +32,16 @@ def account_menu(account):
     """
     print()
     print("╔════════════════════════════════╗")
-    print(f"║      Account Menu - {account.name}      ║")
+    print(f"║ Account Menu - {account.name:<16}║") #The expression <16 indicates that the account name will be left-aligned within a fixed-width field of 16 characters.
     print("╠════════════════════════════════╣")
     print("║ b. Get the balance             ║")
     print("║ d. Make a deposit              ║")
     print("║ w. Make a withdrawal           ║")
     print("║ t. View transaction history    ║")
     print("║ p. Change password             ║")
-    print("║ h. Play tic-tac-toe            ║")
+    print("║ r. Transfer money              ║")
     print("║ s. Show the account            ║")
+    print("║ h. Play tic-tac-toe            ║")
     print("║ q. Quit                        ║")
     print("╚════════════════════════════════╝")
     print()
@@ -51,8 +52,11 @@ def main():
     """
     # Predefined accounts
     accounts = {
-        "Jesus": Cuenta("Jesus", "123", 5000),
-        "Raul": Cuenta("Raul", "password123", 5000)
+        "Jesus": Cuenta("Jesus", "123", 9956),
+        "Raul": Cuenta("Raul", "password123", 7800),
+        "Maria": Cuenta("Maria", "abc", 3296),
+        "Ana": Cuenta("Ana", "xyz", 2578),
+        "David": Cuenta("David", "pass", 1500)
     }
 
     while True:
@@ -62,7 +66,7 @@ def main():
         if option == '3':
             print("Thank you for visiting the bank. Goodbye!")
             break
-
+        
         elif option == '2':
             new_account = crear_cuenta()
             accounts[new_account.name] = new_account
@@ -123,9 +127,29 @@ def main():
                         print('Show Account:')
                         print(account.show_account())
 
+                    elif action == 'r':
+                        print('Transfer Money:')
+                        try:
+                            transfer_amount = float(input('Please enter amount to transfer: '))
+                        except ValueError:
+                            print("Invalid amount. Please enter a number.")
+                            continue
+                        print("Available accounts:")
+                        for acc_name in accounts:
+                            if acc_name != account.name:
+                                print(acc_name)
+                        recipient_name = input('Please enter username: ').strip()
+                        if recipient_name in accounts:
+                            recipient_account = accounts[recipient_name]
+                            user_password = getpass.getpass('Please enter your password: ')
+                            print(account.transfer(transfer_amount, user_password, recipient_account))
+                        else:
+                            print(f"Recipient {recipient_name} not found.")
+
                     elif action == 'h':
                         game = TicTacToe(account)
                         game.main()
+
                     else:
                         print("Invalid option. Please try again.")
             else:

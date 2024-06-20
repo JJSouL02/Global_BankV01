@@ -1,19 +1,16 @@
-ALL_SPACES = list('123456789')  # The keys for a TTT board dictionary.
-X, O, BLANK = 'X', 'O', ' '  # Constants for string values.
-
 class TicTacToe:
     def __init__(self, account):
         """Initialize the game board and set the current player."""
         self.board = self.getBlankBoard()
-        self.currentPlayer = X
-        self.nextPlayer = O
+        self.currentPlayer = 'X'
+        self.nextPlayer = 'O'
         self.account = account  # Pass in the account object
 
     def getBlankBoard(self):
         """Create a new, blank tic-tac-toe board."""
         board = {}  # The board is represented as a Python dictionary.
-        for space in ALL_SPACES:
-            board[space] = BLANK  # All spaces start as blank.
+        for space in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            board[space] = ' '  # All spaces start as blank.
         return board
 
     def getBoardStr(self):
@@ -29,7 +26,7 @@ class TicTacToe:
     def isValidSpace(self, space):
         """Returns True if the space on the board is a valid space number
         and the space is blank."""
-        return space in ALL_SPACES and self.board[space] == BLANK
+        return space in ['1', '2', '3', '4', '5', '6', '7', '8', '9'] and self.board[space] == ' '
 
     def isWinner(self, player):
         """Return True if player is a winner on this TTTBoard."""
@@ -46,8 +43,8 @@ class TicTacToe:
 
     def isBoardFull(self):
         """Return True if every space on the board has been taken."""
-        for space in ALL_SPACES:
-            if self.board[space] == BLANK:
+        for space in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            if self.board[space] == ' ':
                 return False
         return True
 
@@ -70,7 +67,7 @@ class TicTacToe:
                 break
 
             self.board = self.getBlankBoard()
-            self.currentPlayer = X
+            self.currentPlayer = 'X'
 
             self.playGame()
 
@@ -102,9 +99,7 @@ class TicTacToe:
             self.switchPlayer()  # Swap turns.
 
 if __name__ == '__main__':
-    from bank_v02 import obtener_cuenta_logueada
-
-    account = obtener_cuenta_logueada()
-    if account:
-        game = TicTacToe(account)
-        game.main()
+    # Main code to start the game
+    account = None  # Assuming `account` is obtained
+    game = TicTacToe(account)
+    game.main()

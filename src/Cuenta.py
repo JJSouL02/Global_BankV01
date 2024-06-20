@@ -46,3 +46,18 @@ class Cuenta:
             return "\n".join(self.transactions)
         else:
             return "Incorrect password"
+
+    def transfer(self, amount, password, recipient_account):
+        if amount < 0:
+            return "You cannot transfer a negative amount."
+        if password != self.password:
+            return "Incorrect password"
+        if amount > self.balance:
+            return "You do not have sufficient funds to transfer."
+        
+        self.balance -= amount
+        self.transactions.append(f"Transferred: {amount} to {recipient_account.name}")
+        recipient_account.balance += amount
+        recipient_account.transactions.append(f"Received: {amount} from {self.name}")
+        
+        return f"Transfer of {amount} to {recipient_account.name} successful. Your new balance is {self.balance}."
