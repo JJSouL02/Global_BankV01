@@ -1,6 +1,6 @@
 # Tic-Tac-Toe Game with Banking Integration
 
-This project combines a tic-tac-toe game with basic banking functionalities. You can play tic-tac-toe while managing a bank account.
+This project combines a tic-tac-toe with two players game with basic banking functionalities. You can play tic-tac-toe while managing a bank account.
 
 ## Project Contents
 
